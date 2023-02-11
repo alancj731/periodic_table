@@ -6,7 +6,6 @@ fi
 
 CANT_FIND_EXIT(){
 	echo I could not find that element in the database.
-	exit 1
 }
 
 PSQL="psql --username=freecodecamp --dbname=periodic_table -t --no-align -c"
@@ -40,5 +39,4 @@ else
 	TYPE=$($PSQL "SELECT type FROM types WHERE type_id=$TYPE_ID;")
 	# print out the final result
 	echo "The element with atomic number $ATOMIC_NUMBER is $NAME ($SYMBOL). It's a $TYPE, with a mass of $MASS amu. $NAME has a melting point of $MELTING celsius and a boiling point of $BOILING celsius."
-	
 fi
