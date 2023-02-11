@@ -28,12 +28,17 @@ else
 	GET_ELEMENT_RESULT=$(echo $GET_ELEMENT_RESULT | sed 's/|/ /g')
 	# read values from query result
 	read  ATOMIC_NUMBER SYMBOL NAME <<< $GET_ELEMENT_RESULT
+
 	# get properties of the element
 	PROPERTY=$($PSQL "SELECT * FROM properties WHERE atomic_number=$ATOMIC_NUMBER;")
 	# replace | with a space
 	PROPERTY=$(echo $PROPERTY | sed 's/|/ /g')
 	# read values from query result
-	read ATOMIC_NUMBER MASS MELTING BOILING <<< $PROPERTY
+	read ATOMIC_NUMBER MASS MELTING BOILING TYPE_ID <<< $PROPERTY
+	
+	# find the type of the element
+	TYPE=$($PSQL "SELECT type FROM types WHERE type_id=$TYPE_ID;")
+	echo $TYPE
 	# print out the final result
 	echo "The element with atomic number $ATOMIC_NUMBER is $NAME ($SYMBOL). It's a TYPE, with a mass of $MASS amu. $NAME has a melting point of $MELTING celsius and a boiling point of $BOILING celsius."
 	
