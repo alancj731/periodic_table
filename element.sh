@@ -34,7 +34,7 @@ else
 	PROPERTY=$(echo $PROPERTY | sed 's/|/ /g')
 	# read values from query result
 	read ATOMIC_NUMBER MASS MELTING BOILING <<< $PROPERTY
-	# check if it is correct
-	echo $ATOMIC_NUMBER $MASS $MELTING $BOILING
+	# print out the final result
+	echo "The element with atomic number $ATOMIC_NUMBER is $NAME ($SYMBOL). It's a TYPE, with a mass of $MASS amu. $NAME has a melting point of $MELTING celsius and a boiling point of $BOILING celsius."
 	
 fi
